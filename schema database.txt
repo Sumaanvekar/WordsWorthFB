@@ -1,0 +1,111 @@
+Team 200 OK
+
+////////////////////////////////////////////////////////login///////////////////////////////////////////////
+create table Login
+(
+	email varchar(40) unique not null,
+	password varchar(20) not null,
+	user_type varchar(20) 
+);
+
+/////////////////////////////////////////////////customer///////////////////////////////////////////////////
+
+ create table Customer(
+	customerId number(10) primary key not null,
+	customerName varchar(40) not null,
+	Email varchar(40) unique not null,
+	contact number(13) not null,
+	password varchar(20) not null,
+	address varchar(100) not null);
+
+INSERT INTO  Customer VALUES(1,'Ranjitha','ranjithapujar@gmail.com',1234567891,'ranju123','Shimoga');
+INSERT INTO  Customer VALUES(2,'Sushma','sushma@gmail.com',1234567892,'sushma123','Bangalore');
+//////////////////////////////////////////////////supplier/////////////////////////////////////////////////////////
+
+create table Supplier(
+	supplierId number(10) primary key not null,
+	supplierName varchar(40) not null,
+	Email varchar(40) unique not null,
+	contact number(13) not null,
+	password varchar(20) not null,
+	address varchar(100) not null,
+	supplystatus varchar(20) not null
+	);
+
+INSERT INTO  Supplier  VALUES(1,'Ranjitha','ranjithapujar@gmail.com',1234567891,'ranju123','Shimoga','supplied');
+INSERT INTO  Supplier  VALUES(2,'Suma','suma@gmail.com',1234567892,'suma123','Bangalore','supplied');
+INSERT INTO  Supplier  VALUES(3,'Sushma','sushma@gmail.com',1234567893,'sushma123','Davangere','supplied');
+/////////////////////////////////////////////////////////////books///////////////////////////////////////////////////////
+
+  create table Books(
+	bookid number(10) primary key not null,
+	supplierid number(10) references supplier(supplier_id),
+	bookname varchar(50) not null,
+	author varchar(20) not null,
+	price number(20) not null,
+	category varchar(20) not null,
+	bookquantity number(10) not null,
+	bookavailability varchar(10) not null
+	);
+
+INSERT INTO  Books  VALUES(1,1,'Wings of Fire','Abdul Kalam',300,'Autobiography',100,'true');
+INSERT INTO  Books  VALUES(2,1,'A Tale of Two Cities','Charles Darwin',200,' Historical novel',150,'false');
+INSERT INTO  Books  VALUES(3,3,'David Copperfield','Charles Darwin',259,'Autobiography',100,'true');
+INSERT INTO  Books  VALUES(4,3,'A Revenue Stamp','Amrita Pritam',360,'Autobiography',150,'true');
+INSERT INTO  Books  VALUES(5,2,'Death of a City','Amrita Pritam',280,'Fiction',100,'false');
+INSERT INTO  Books  VALUES(6,2,'Anna Karenina','Leo Tolstoy',300,'Realist novel',150,'true');
+INSERT INTO  Books  VALUES(7,2,'War and Peace','Leo Tolstoy',320,'Historical novel',150,'true');
+INSERT INTO  Books  VALUES(8,1,'Apple Cart','George Bernard Shaw',180,'Comedy',100,'false');
+INSERT INTO  Books  VALUES(9,1,'Arms and the Man','George Bernard Shaw',220,'Comedy',150,'true');
+INSERT INTO  Books  VALUES(10,3,'Broken Wings','Sarojini Naidu',250,'Poetic novel',100,'true');
+
+///////////////////////////////example//////////////////////////////////////
+
+INSERT INTO  Books  VALUES(3,3,'David Copperfield','Charles Darwin',259,'Autobiography',100,'true');
+INSERT INTO  Books  VALUES(6,2,'Anna Karenina','Leo Tolstoy',300,'Realist novel',150,'true');
+INSERT INTO  Books  VALUES(8,1,'Apple Cart','George Bernard Shaw',180,'Comedy',100,'false');
+INSERT INTO  Books  VALUES(10,3,'Broken Wings','Sarojini Naidu',250,'Poetic novel',100,'true');
+
+////////////////////////////////////////////////////////Orders//////////////////////////////////////////////////////////////////
+
+ create table Orders(
+	orderid number(10) primary key not null,
+	bookid number(10) references Books(book_id),
+	quantity number(10) not null,
+	totalprice number(7,3) not null,
+	customerid number(20) references Customer(customer_id),
+	paymentstatus varchar(20) not null,
+	orderstatus varchar(20) not null,
+	deliverydate date not null,
+	orderdate date not null
+	);
+INSERT INTO  Orders VALUES(1,1,15,200,2,'confirm','delivered',);
+
+/////////////////////////////////////Admin///////////////////////////////////////
+ create table Admin(
+	adminid number(10) primary key not null,
+	email varchar(20) not null unique,
+	password varchar(20) not null
+	);
+
+
+INSERT INTO  Admin VALUES(1,'ad@gmail.com','ad123');
+
+//////////////////////////////////////book//////////////////////////////////////////////////////////
+create sequence book_sequence
+start with 1
+increment by 1
+cache 100;
+
+
+
+
+
+
+
+
+		
+	
+
+
+	
